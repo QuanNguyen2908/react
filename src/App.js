@@ -79,6 +79,25 @@ class App extends Component {
         });
         localStorage.setItem('task',JSON.stringify(task));  
     }
+    onUpdateStatus = (id) => {
+        var {task} = this.state;
+        var index = this.findIndex(id);
+        task[index].status= !task[index].status;
+        this.setState({
+            task : task
+        })
+        localStorage.setItem('task', JSON.stringify(task));
+    }
+    findIndex = (id) => {
+        var {task} = this.state;
+        var result = -1;
+        task.map((task, index) =>{
+            if(task.id === id){
+                result= index;
+            }
+        });
+        return result;
+    }
     render() {
         var { task , isDisplayForm } = this.state;
         var elmTaskFrom = isDisplayForm ? <TaskForm onSubmit={ this.onSubmit } onCloseForm ={ this.onCloseForm }/> : ""
@@ -100,7 +119,7 @@ class App extends Component {
                             Genderte Data
                         </button>
                         <TaskControl />
-                        <TaskList task={task}/>
+                        <TaskList task={task} onUpdateStatus = { this.onUpdateStatus } />
                     </div>
                 </div>
             </div>
