@@ -12,7 +12,10 @@ class TaskForm extends Component {
     }
     onChange = (event) => {
         var name = event.target.name;
-        var value = event.target.value
+        var value = event.target.value;
+        if(name === 'status'){
+            value = event.target.value=== "true"? true : false;
+        }
         this.setState({
             [name] : value
         })

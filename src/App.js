@@ -70,8 +70,14 @@ class App extends Component {
         
     }
     onSubmit = (data) => {
-        console.log(data);
+        var {task}= this.state;
 
+        data.id = this.genderateId();
+        task.push(data);
+        this.setState({
+            task: task
+        });
+        localStorage.setItem('task',JSON.stringify(task));  
     }
     render() {
         var { task , isDisplayForm } = this.state;
