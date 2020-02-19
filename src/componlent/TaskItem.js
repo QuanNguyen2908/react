@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 
 class TaskItem extends Component {
+
     render() {
+        var { task, index} = this.props;
+        console.log(task);
         return (
             <tr>
-                <td>1</td>
-                <td>Hocj react</td>
+                <td> {index +1} </td>
+                <td> { task.name } </td>
                 <td className="text-center">
-                    <span className="label label-danger">Kich hoat</span>
+                 <span className={ task.status === true ? 'label label-danger' : 'label label-success'}>{ task.status === true ? 'kich hoat' : 'An'}</span>
                 </td>
                 <td className="text-center">
                     <button

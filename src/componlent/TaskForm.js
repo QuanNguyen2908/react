@@ -1,5 +1,29 @@
 import React, { Component } from 'react';
 class TaskForm extends Component {
+
+
+    constructor(props){
+        super(props);
+        this.state = {
+            name : '',
+            status : false
+
+        }
+    }
+    onChange = (event) => {
+        var name = event.target.name;
+        var value = event.target.value
+        this.setState({
+            [name] : value
+        })
+    }
+    onSubmit = (event) =>{
+        event.preventDefault();
+        this.props.onSubmit(this.state);
+    }
+    onCloseForm = () => {
+        this.props.onCloseForm();
+    }
     render() {
         return (
             <div className="panel panel-warning">
@@ -8,23 +32,28 @@ class TaskForm extends Component {
                         Thêm Công Việc
                         <span
                             className="fa fa-times-circle text-right"
-                        ></span>
+                            onClick ={this.onCloseForm}
+                        >x</span>
                     </h3>
                 </div>
                 <div className="panel-body">
-                    <form>
+                    <form onSubmit = { this.onSubmit }>
                         <div className="form-group">
                             <label>Tên :</label>
                             <input
                                 type="text"
                                 className="form-control"
                                 name="name"
+                                value= {this.state.name}
+                                onChange ={ this.onChange}
                             />
                         </div>
                         <label>Trạng Thái :</label>
                         <select
                             className="form-control"
                             name="status"
+                            value= {this.state.status}
+                            onChange ={ this.onChange}
                         >
                             <option value={true}>Kích Hoạt</option>
                             <option value={false}>Ẩn</option>
